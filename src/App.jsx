@@ -1,12 +1,26 @@
-import React from 'react'
-import {Typography, AppBar,Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container, Button} from '@material-ui/core';
+import {React, useState} from 'react'
+import {Box, TextField, Typography, AppBar,Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container, Button} from '@material-ui/core';
 import CodeIcon from '@material-ui/icons/Code';
 import useStyles from './styles';
 
+
+const initialUser = {
+    name: '',
+    email: '',
+    password: ''
+};
 const cards =  [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const App = () => {
     const classes = useStyles();
+    const [user, setUser] = useState(initialUser);    
+    
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert(`The name you entered was: ${user.name}`)
+      }
+    
+
     return (
         <>
         <CssBaseline />
@@ -64,6 +78,55 @@ const App = () => {
                         </Card>
                     </Grid>
                     ))};
+                    <Grid item xs={12}>
+                        <Card className={classes.card}>
+                            <CardContent className={classes.cardContent}>
+                                <Typography variant='h5' align='center'>Register Form</Typography>
+                                <Box m={2}>
+                                    <form autoComplete='off' onSubmit={handleSubmit}>
+                                    <Grid mt={4} container spacing={4} justifyContent='center' >
+                                            <Grid item>
+                                                <TextField 
+                                                    id="name" 
+                                                    label="Name"
+                                                    name="name"
+                                                    variant="outlined"    
+                                                    value={user.name}     
+                                                    onChange={(e) => setUser({...user, name: e.target.value})}                                                                                 
+                                                    autoComplete='username'
+                                                    
+                                                />
+                                            </Grid>
+                                            <Grid item>
+                                                <TextField 
+                                                    id="email" 
+                                                    label="email" 
+                                                    variant="outlined"   
+                                                    value={user.email}             
+                                                    onChange={(e) => setUser({...user, email: e.target.value})}                                                             
+                                                    autoComplete='email,'
+                                                />
+                                            </Grid>
+                                            <Grid item>
+                                                <TextField 
+                                                    id="password" 
+                                                    label="Password"
+                                                    variant="outlined"
+                                                    type='password'
+                                                    value={user.password}     
+                                                    onChange={(e) => setUser({...user, password: e.target.value})}                 
+                                                    autoComplete='current-password'
+                                               />
+                                            </Grid>
+                                            <Grid item>
+                                            <Button type='submit' size='large' variant='outlined' color='primary'>Submit</Button>
+                                            </Grid>
+                                        </Grid>
+                                    </form>
+                                </Box>
+                            </CardContent>
+                        </Card>
+                    </Grid>
                 </Grid>
             </Container>
         </main>
