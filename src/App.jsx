@@ -104,7 +104,7 @@ const App = () => {
                                                     variant="outlined"   
                                                     value={user.email}             
                                                     onChange={(e) => setUser({...user, email: e.target.value})}                                                             
-                                                    autoComplete='email,'
+                                                    autoComplete='email'
                                                 />
                                             </Grid>
                                             <Grid item>
